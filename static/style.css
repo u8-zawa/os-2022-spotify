@@ -1,0 +1,20 @@
+th {
+    padding: 12px;
+    text-align: start;
+}
+
+td {
+    padding: 12px;
+}
+
+.rank {
+    text-align: center;
+}
+
+.thumbnail {
+    display: flex;
+}
+
+.thumbnail-names {
+    margin: auto auto auto 30px;
+}

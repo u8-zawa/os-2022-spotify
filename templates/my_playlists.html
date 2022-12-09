@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>My Playlists</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>PLAYLIST</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in items %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>
+                    <div class="thumbnail">
+                        {% if item.images|length > 0 %}
+                            <img class="cover-art" width="160" height="160" alt="Track image"
+                                 src={{ item.images.0.url }}>
+                        {% else %}
+                            <img class="cover-art" width="160" height="160" alt="Track image"
+                                 src="../static/images/null_img.jpg">
+                        {% endif %}
+                        <div class="thumbnail-names">
+                            <h3>{{ item.name }}</h3>
+                            {% if item.description != "" %}
+                                <h4>{{ item.description }}</h4>
+                            {% endif %}
+                            <h4>作成者: {{ item.owner.display_name }}</h4>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

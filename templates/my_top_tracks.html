@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>My Top Songs</h1>
+    {% if term == 0 %}
+        <h2>Short Term</h2>
+    {% elif term == 1 %}
+        <h2>Medium Term</h2>
+    {% elif term == 2 %}
+        <h2>Long Term</h2>
+    {% endif %}
+    <label>
+        <select onChange="location.href=value;">
+            {% if term == 0 %}
+                <option value="/my_top_tracks?term=0" selected>Short Term</option>
+                <option value="/my_top_tracks?term=1">Medium Term</option>
+                <option value="/my_top_tracks?term=2">Long Term</option>
+            {% elif term == 1 %}
+                <option value="/my_top_tracks?term=0">Short Term</option>
+                <option value="/my_top_tracks?term=1" selected>Medium Term</option>
+                <option value="/my_top_tracks?term=2">Long Term</option>
+            {% elif term == 2 %}
+                <option value="/my_top_tracks?term=0">Short Term</option>
+                <option value="/my_top_tracks?term=1">Medium Term</option>
+                <option value="/my_top_tracks?term=2" selected>Long Term</option>
+            {% endif %}
+        </select>
+    </label>
+    <table>
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>TRACK</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in items %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>
+                    <div class="thumbnail">
+                        {% if item.album.images|length > 0 %}
+                            <img class="cover-art" width="160" height="160" alt="Track image"
+                                 src={{ item.album.images.0.url }}>
+                        {% else %}
+                            <img class="cover-art" width="160" height="160" alt="Track image"
+                                 src="../static/images/null_img.jpg">
+                        {% endif %}
+                        <div class="thumbnail-names">
+                            <h3>{{ item.name }}</h3>
+                            <h4>{{ item.artists.0.name }}</h4>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
